@@ -1,0 +1,24 @@
+*, *:before, *:after{position:relative;background-position:0 0; background-repeat: no-repeat; -moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+a{text-decoration:none;}
+.wrap{overflow:hidden;width: 1010px;margin: 0 auto;padding: 0 15px 30px;}
+#mondrals{background:#666;margin:60px auto;padding-top:100px;}
+#mondrals:after,#mondrals:before{content:"";height:10px;background:#777;width:100px;position:absolute;bottom:0;left:-100px;}
+#mondrals:after{right:-100px;left:auto;}
+#mondrian{background:#fff;border:5px solid #000;}
+#mondrian:after,#mondrian:before{content:"";height:50px;background:red;width:10px;position:absolute;bottom:5px;left:-105px;z-index:1000;}
+#mondrian:after{right:-105px;left:auto;}
+.block{position:absolute;}
+.point{position:absolute;}
+.mondral{border-radius:20px;position:absolute;border-color:#333;z-index:20;border-style:solid;}
+.mondral:before{z-index:20;content:"";display:block;width:40px;height:40px;position:absolute;top:-42px;left:-20px;background: url(img/lemming-40.gif) no-repeat 0 0;}
+.mondral:after{content:"";display:block;width:20px;height:20px;position:absolute;border-radius:20px;border:2px solid #111;top:-10px;left:-10px;}
+.mondral.reverse:before{background: url(img/lemming-40-r.gif) no-repeat 0 0;}
+.mondral.flat{border:0;height:2px !important;width:30px !important;background:#cc0000;}
+.mondral.flat:before{top:-35px;left:-5px;background: url(img/lemming-stopped.gif) no-repeat 0 0;}
+.mondral.flat.reverse:before{background: url(img/lemming-stopped-r.gif) no-repeat 0 0;}
+.mondral.flat:after{display:none;}
+.game-over{background:#fff;padding:30px 20px;position:absolute;left:50%;top:30px;width:500px;margin-left:-250px;text-align:center;border:4px solid #ddd;z-index: 1500;}
+.game-over h2{font-size:54px;margin-top:0;}
+.game-over .escaped{font-size:38px;font-weight:bold;margin-top: 18px;}
+.game-over .time{font-size:25px;font-weight:bold;margin-top: 18px;}
+.game-over .try-again{display:inline-block;font-size:20px;font-weight:bold;margin-top: 28px;border:3px solid #444;padding:8px 16px;border-radius:10px;}
