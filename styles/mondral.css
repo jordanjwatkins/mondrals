@@ -1,0 +1,58 @@
+.mondral {
+    border-radius: 20px;
+    position: absolute;
+    border-color: transparent;
+    z-index: 20;
+    border-style: solid;
+    border-width: 10px;
+}
+
+.mondral:before {
+    z-index: 20;
+    content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: -42px;
+    left: -20px;
+    background-image: url(../img/lemming-40.gif);
+}
+
+.mondral:after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 20px;
+    border: 2px solid #111;
+    top: -10px;
+    left: -10px;
+    background-color: #cc0000;
+}
+
+.mondral.reverse:before {
+    background-image: url(../img/lemming-40-r.gif);
+}
+
+.mondral.flat {
+    border: 0;
+    height: 2px !important;
+    width: 30px !important;
+    background-color: #cc0000;
+}
+
+.mondral.flat:before {
+    top: -35px;
+    left: -5px;
+    background-image: url(../img/lemming-stopped.gif);
+}
+
+.mondral.flat.reverse:before {
+    background-image: url(../img/lemming-stopped-r.gif);
+}
+
+.mondral.flat:after {
+    display: none;
+}
