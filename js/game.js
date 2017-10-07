@@ -61,7 +61,6 @@
 			setTimeout(function(){
 				self.eventText('Spawn!', 'red', spawnPoint.x - 20, spawnPoint.y - 20);
 				var mondral = new Mondral(spawnPoint, self);
-				mondral.el.css({'border-width':'10px'})
 				self.canvas.append(mondral.el);
 				self.entities.push(mondral);
 			}, 3000);
