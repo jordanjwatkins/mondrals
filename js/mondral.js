@@ -9,7 +9,7 @@ function Mondral(spawnPoint, game) {
 	this.ySpeed = 2;
 	this.x = spawnPoint.x + this.width / 2;
 	this.y = spawnPoint.y + this.height / 2;
-	this.el = $('<div class="mondral"></div>').width(this.width).height(this.height).css({'border-color': this.color, 'left': spawnPoint.x, 'top': spawnPoint.y});
+	this.el = $('<div class="mondral"></div>').width(this.width).height(this.height).css({'left': spawnPoint.x, 'top': spawnPoint.y});
 	this.flat = false;
 	this.fallDist = 0;
 	this.overlapping = false;
