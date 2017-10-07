@@ -1,0 +1,15 @@
+*,
+*:before,
+*:after {
+    position: relative;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+}
+
+.wrap {
+    overflow: hidden;
+    width: 1010px;
+    margin: 0 auto;
+    padding: 0 15px 30px;
+}

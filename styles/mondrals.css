@@ -1,0 +1,22 @@
+#mondrals {
+    background: #666;
+    margin: 60px auto;
+    padding-top: 100px;
+}
+
+/* exit paths */
+#mondrals:after,
+#mondrals:before {
+    content: "";
+    height: 10px;
+    background: #777;
+    width: 100px;
+    position: absolute;
+    bottom: 0;
+    left: -100px;
+}
+
+#mondrals:after {
+    right: -100px;
+    left: auto;
+}

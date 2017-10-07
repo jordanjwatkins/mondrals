@@ -1,0 +1,27 @@
+/* block grid */
+#mondrian {
+    background: #fff;
+    border: 5px solid #000;
+}
+
+#mondrian .block {
+    position: absolute;
+}
+
+/* exits */
+#mondrian:after,
+#mondrian:before {
+    content: "";
+    height: 50px;
+    background: red;
+    width: 10px;
+    position: absolute;
+    bottom: 5px;
+    left: -105px;
+    z-index: 1000;
+}
+
+#mondrian:after {
+    right: -105px;
+    left: auto;
+}
