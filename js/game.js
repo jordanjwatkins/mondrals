@@ -1,26 +1,24 @@
-(function ($) {
-	"use strict";
-	$.fn.mondrals = function () {
-		var game = new Game($(this));
+(function (Blocks, randNum, Mondral, dom) {
+	'use strict';
+
+	function mondrals(elContainer) {
+		var game = new Game(elContainer);
+
 		return game;
-	};
+	}
 
-	function Game($canvas) {
+	function Game(elContainer) {
 		var self = this, fps = 60;
-		var mondrian = $canvas.mondrian();
+		var mondrian = window.mondrian(elContainer);
 
-		$canvas.css({width: mondrian.cWidth});
-		
-		// start game loop				
-		this.gameLoop = setInterval(function () { self.update(); }, 1000 / fps);
+		elContainer.style.width = mondrian.cWidth + 'px';
 
-		// construct game object
 		this.mondralCount = 0;
-		this.canvas = $canvas;
-		this.height = $canvas.outerHeight();
-		this.width = mondrian.width();
+		this.elContainer = elContainer;
+		this.height = elContainer.clientHeight;
+		this.width = mondrian.el.clientWidth;
 		this.mondrian = mondrian;
-		this.blocks = new Blocks(this.mondrian.find('.block'), self);
+		this.blocks = new Blocks(dom.find('.block', mondrian.el), self);
 		this.entities = [];
 		this.counter = 1;
 		this.gameOver = false;
@@ -37,18 +35,22 @@
 
 			for (i = 0; i < this.entities.length; i++) {
 				this.entities[i].update();
+
 				if (this.entities[i].flat) {
 					flatCount++;
-				}				
+				}
 			}
-			
+
 			if (flatCount + this.points >= this.entities.length && this.entities.length > 0) {
-				if (!this.gameOver) {									
-					this.gameOver = true; 
-					this.gameOverText();				
+				if (!this.gameOver) {
+					this.gameOver = true;
+					this.gameOverText();
+
 					// end game loop
-					setTimeout(function(){clearInterval(self.gameLoop);console.log('game loop stopped');},4000);				
-				}				
+					setTimeout(function () {
+						clearInterval(self.gameLoop);
+					}, 4000);
+				}
 			}
 
 			this.counter++;
@@ -56,27 +58,67 @@
 
 		this.addMondral = function () {
 			var self = this;
-			var spawnPoint = {x: randNum(this.mondrian.width() - 40) + 20, y: 0};
+			var spawnPoint = { x: randNum(this.mondrian.cWidth - 40) + 20, y: 0 };
+
 			this.eventText('Get Ready!', 'red', spawnPoint.x - 20, spawnPoint.y - 20);
-			setTimeout(function(){
-				self.eventText('Spawn!', 'red', spawnPoint.x - 20, spawnPoint.y - 20);
+
+			setTimeout(function () {
 				var mondral = new Mondral(spawnPoint, self);
-				self.canvas.append(mondral.el);
+
+				self.eventText('Spawn!', 'red', spawnPoint.x - 20, spawnPoint.y - 20);
+
 				self.entities.push(mondral);
+
+				setTimeout(function () {
+					self.elContainer.appendChild(mondral.el);
+				}, 100);
 			}, 3000);
+
 			this.mondralCount++;
 		};
-		
+
 		this.eventText = function (text, color, x, y) {
-			$('<div>'+text+'</div>').css({color: color, position: 'absolute', left: x, top: y, fontWeight: 'bold',whiteSpace: 'nowrap'}).appendTo(this.canvas).animate({top: y - 30, opacity: 0}, 1500);
-		}
-		
+			var elText = dom.make('<div>' + text + '</div>');
+
+			dom.css(elText, {
+				color: color,
+				position: 'absolute',
+				left: x + 'px',
+				top: y + 'px',
+				fontWeight: 'bold',
+				whiteSpace: 'nowrap',
+				transition: '1500ms opacity, 1500ms transform',
+			});
+
+			setTimeout(function () {
+				dom.css(elText, {
+					opacity: 0,
+					transform: 'translateY(-200%)',
+				});
+
+			}, 100);
+
+			this.elContainer.appendChild(elText);
+		};
+
 		this.gameOverText = function () {
-			var text = '<div class="escaped">' + this.points + ' / ' + this.entities.length + ' Escaped</div>';	
+			var text = '<div class="escaped">' + this.points + ' / ' + this.entities.length + ' Escaped</div>';
+
 			this.endTime = new Date();
-			text += '<div class="time">Time: ' + (((this.endTime.getTime() - this.startTime.getTime()) / 1000) + ' seconds') + '</div>';
-			text += '<a class="try-again" href="./">Try Again</a>';			
-			$('<div class="game-over"><h2>Game Over</h2>' + text + '</div>').appendTo(this.canvas);
-		}
+
+			text += '<div class="time">Time: ' + ((this.endTime.getTime() - this.startTime.getTime()) / 1000) + ' seconds</div>';
+			text += '<a class="try-again" href="./">Try Again</a>';
+
+			this.elContainer.appendChild(
+				dom.make('<div class="game-over"><h2>Game Over</h2>' + text + '</div>')
+			);
+		};
+
+		// start game loop
+		this.gameLoop = setInterval(function () {
+			self.update();
+		}, 1000 / fps);
 	}
-})(jQuery);
+
+	window.mondrals = mondrals;
+})(window.Blocks, window.randNum, window.Mondral, window.dom);
