@@ -56,7 +56,12 @@
 				if (color.hasOwnProperty(block)) {
 					blockPos = color[block].pos;
 
-					if (point.x >= blockPos.left && point.x <= blockPos.right && point.y <= blockPos.bottom + game.mondrian.unitSize && point.y >= blockPos.top + game.mondrian.unitSize) {
+					if (
+						point.x >= blockPos.left &&
+						point.x <= blockPos.right &&
+						point.y <= blockPos.bottom + game.mondrian.unitSize &&
+						point.y >= blockPos.top + game.mondrian.unitSize
+					) {
 						return true;
 					}
 				}
@@ -74,7 +79,12 @@
 				if (game.entities.hasOwnProperty(mondral)) {
 					mondral = game.entities[mondral];
 
-					if (mondral.x + 10 >= blockPos.left && mondral.x - 10 <= blockPos.right && mondral.y + 10 <= blockPos.bottom + game.mondrian.unitSize && mondral.y + 10 >= blockPos.top + game.mondrian.unitSize) {
+					if (
+						mondral.x >= blockPos.left - 20 &&
+						mondral.x <= blockPos.right + 20 &&
+						mondral.y <= blockPos.bottom + game.mondrian.unitSize &&
+						mondral.y + mondral.height >= blockPos.top + game.mondrian.unitSize
+					) {
 						return false;
 					}
 				}
